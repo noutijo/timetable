@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.supptic.controllers.InformationEnseignantController">
+   <children>
+      <AnchorPane fx:id="panToPrint" layoutY="39.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="321.0" prefWidth="487.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <VBox layoutX="116.0" layoutY="59.0" prefHeight="152.0" prefWidth="284.0" spacing="20.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="146.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Id : " />
+                        <Text fx:id="textId" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="260.13671875" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="146.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :" />
+                        <Text fx:id="textNom" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="256.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="146.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom : " />
+                        <Text fx:id="textPrenom" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="231.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="146.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse : " />
+                        <Text fx:id="textAdresse" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="237.0">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox layoutX="672.0" layoutY="451.0" AnchorPane.bottomAnchor="49.0" AnchorPane.rightAnchor="151.0" />
+            <HBox layoutX="549.0" layoutY="451.0" />
+            <VBox layoutX="486.0" layoutY="58.0" prefHeight="152.0" prefWidth="284.0" spacing="20.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="146.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email : " />
+                        <Text fx:id="textEmail" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="260.13671875" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="146.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Télephone : " />
+                        <Text fx:id="textTelephone" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="256.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="146.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Statut : " />
+                        <Text fx:id="textStatut" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="231.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="146.0">
+                     <children>
+                        <Text fx:id="textCodeCategorie" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="237.0">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="68.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/Info_52px.png" />
+               </image>
+            </ImageView>
+            <Separator layoutX="100.0" layoutY="289.0" opacity="0.5" prefWidth="200.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <JFXButton layoutX="728.0" layoutY="374.0" onMouseClicked="#imprimerCliquer" style="-fx-background-radius: 10px; -fx-border-color: #00aff0; -fx-border-radius: 10px; -fx-background-color: transparent;" text="Imprimer" textFill="#00aff0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="728.0" AnchorPane.rightAnchor="34.0" AnchorPane.topAnchor="374.0">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/Print_32px.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <VBox alignment="CENTER" layoutX="819.0" layoutY="14.0" onMouseClicked="#closeFenModifierCliquer" prefHeight="25.0" prefWidth="20.0" AnchorPane.leftAnchor="819.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <children>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/Delete_50px.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

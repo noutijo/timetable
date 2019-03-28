@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.supptic.controllers.AjouterEnseignantController">
+   <children>
+      <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="937.0">
+               <children>
+                  <HBox alignment="CENTER" layoutX="152.0" layoutY="104.0" prefHeight="202.0" prefWidth="634.0" spacing="100.0" AnchorPane.bottomAnchor="224.0" AnchorPane.leftAnchor="152.0" AnchorPane.rightAnchor="151.0" AnchorPane.topAnchor="104.0">
+                     <children>
+                        <VBox prefHeight="152.0" prefWidth="284.0" spacing="20.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="146.0">
+                                 <children>
+                                    <JFXTextField fx:id="id" focusColor="#00aff0" labelFloat="true" prefWidth="250.0" promptText="id" />
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <JFXTextField fx:id="nom" focusColor="#00aff0" labelFloat="true" prefWidth="250.0" promptText="Nom " />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="146.0">
+                                 <children>
+                                    <JFXTextField fx:id="prenom" focusColor="#00aff0" labelFloat="true" prefWidth="250.0" promptText="Prenom" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="146.0">
+                                 <children>
+                                    <JFXTextField fx:id="adresse" focusColor="#00aff0" labelFloat="true" prefWidth="250.0" promptText="Adress" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox spacing="20.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="146.0">
+                                 <children>
+                                    <JFXTextField fx:id="email" focusColor="#00aff0" labelFloat="true" prefWidth="250.0" promptText="Email" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="146.0">
+                                 <children>
+                                    <JFXTextField fx:id="telephone" focusColor="#00aff0" labelFloat="true" prefWidth="250.0" promptText="Téléphone" />
+                                 </children>
+                              </HBox>
+                              <VBox>
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Statut" />
+                                    <JFXComboBox fx:id="statut" prefHeight="25.0" prefWidth="250.0" />
+                                 </children>
+                              </VBox>
+                              <VBox />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="672.0" layoutY="451.0" AnchorPane.bottomAnchor="49.0" AnchorPane.rightAnchor="151.0">
+                     <children>
+                        <JFXButton onMouseClicked="#enregistrerCliquer" prefHeight="28.0" prefWidth="114.0" style="-fx-border-color: #00aff0; -fx-border-radius: 10px;" text="Enregistrer" textFill="#00aff0">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/Save_50px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="549.0" layoutY="451.0">
+                     <children>
+                        <JFXButton prefHeight="28.0" prefWidth="114.0" style="-fx-border-color: #46b86e; -fx-border-radius: 10px;" text="Vider" textFill="#46b86e">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/Empty%20Trash_48px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
