@@ -1,1 +1,6 @@
 je suis
+tu es
+il est 
+nous sommes 
+vous etes
+ils sont
