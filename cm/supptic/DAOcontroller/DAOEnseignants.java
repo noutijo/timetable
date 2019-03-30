@@ -39,7 +39,7 @@ public class DAOEnseignants {
             stmnt.setString(5, enseignant.getEmail_enseignant());
             stmnt.setInt(6, enseignant.getTelephone());
             stmnt.setString(7, enseignant.getStatut_enseignant());
-            
+
             stmnt.execute();
             System.out.println("Enregistrer avec succes ...");
         } catch (SQLException ex) {
@@ -49,12 +49,13 @@ public class DAOEnseignants {
             stmnt.close();
         }
     }
+
     //Avoir la liste de tous les enseignants qui se trouvent dans la base de donnee
     /**
-     * 
+     *
      * @param myConn
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     public List<Enseignant> getAllEnseignants(Connection myConn) throws Exception {
 
@@ -81,10 +82,10 @@ public class DAOEnseignants {
 
     //Pour supprimer un enseignant
     /**
-     * 
+     *
      * @param id
      * @param myConn
-     * @throws SQLException 
+     * @throws SQLException
      */
     public void effacerProduit(String id, Connection myConn) throws SQLException {
         PreparedStatement myStmt = null;
@@ -96,7 +97,7 @@ public class DAOEnseignants {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }finally{
+        } finally {
             myConn.close();
             myStmt.close();
         }
@@ -104,10 +105,10 @@ public class DAOEnseignants {
 
     //Modifier un enseignant
     /**
-     * 
+     *
      * @param enseignant
      * @param myConn
-     * @throws SQLException 
+     * @throws SQLException
      */
     public void modifierEnseignant(Enseignant enseignant, Connection myConn) throws SQLException {
         PreparedStatement myStmt = null;
@@ -128,7 +129,7 @@ public class DAOEnseignants {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }finally{
+        } finally {
             myConn.close();
             myStmt.close();
         }
@@ -136,10 +137,10 @@ public class DAOEnseignants {
 
     //La methode qui retourne un objet enseignant apres avoir recu en parametre un resultset
     /**
-     * 
+     *
      * @param myRs
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
     private Enseignant convertRowToEnseignant(ResultSet myRs) throws SQLException {
 
@@ -150,9 +151,45 @@ public class DAOEnseignants {
         String email = myRs.getString("email_enseignant");
         int tel = myRs.getInt("telephone_enseignant");
         String sattut = myRs.getString("statut_enseignant");
-       
+
         Enseignant tempEnseignant = new Enseignant(id, nom, prenom, add, email, tel, sattut);
 
         return tempEnseignant;
+    }
+
+    public int getINouveauId(Connection con) {
+
+        Statement myStmt = null;
+        ResultSet myRs = null;
+        int id = 0;
+        try {
+            myStmt = con.createStatement();
+            myRs = myStmt.executeQuery("SELECT * from identifiant");
+
+            while (myRs.next()) {
+                id = myRs.getInt("autoIcri");
+            }
+        } catch (Exception ex) {
+        } finally {
+            System.out.println("voila l'idi)");
+        }
+
+        return id;
+    }
+
+    public void mettreAjoutId   (int id, Connection myConn) throws SQLException {
+
+        PreparedStatement stmnt = null;
+
+        try {
+            stmnt = myConn.prepareStatement("UPDATE identifiant SET `autoIncri`=? WHERE `autoIncri`='" + id + "'");
+            stmnt.setInt(1, id + 1);
+            stmnt.executeUpdate();
+            System.out.println("nombres de vote incrementer avec succès.");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+
+        }
     }
 }

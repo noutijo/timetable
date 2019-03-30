@@ -16,8 +16,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -60,8 +58,9 @@ public class AjouterEnseignantController implements Initializable {
 
     @FXML
     void enregistrerCliquer(MouseEvent event) throws SQLException, ClassNotFoundException {
-        try {
-            if (rienEstVide()) {
+
+        if (rienEstVide()) {
+            try {
                 Enseignant enseignant = new Enseignant(id.getText(), nom.getText(), prenom.getText(), adresse.getText(), email.getText(),
                         Integer.valueOf(telephone.getText()), statut.getSelectionModel().getSelectedItem().toString());
 
@@ -71,7 +70,7 @@ public class AjouterEnseignantController implements Initializable {
                 snac.getStyleClass().add("jfx-snackbar-content");
                 snac.show("Nouvel enseigant ajouté avec succès", 5000);
                 vider();
-            } else {
+            } catch (ClassNotFoundException | NumberFormatException | SQLException ex) {
                 new Thread(() -> {
                     errorText.setVisible(true);
                     try {
@@ -82,8 +81,7 @@ public class AjouterEnseignantController implements Initializable {
                     }
                 }).start();
             }
-
-        } catch (ClassNotFoundException | NumberFormatException | SQLException ex) {
+        } else {
             new Thread(() -> {
                 errorText.setVisible(true);
                 try {
@@ -94,6 +92,7 @@ public class AjouterEnseignantController implements Initializable {
                 }
             }).start();
         }
+
     }
 
     @Override
@@ -111,6 +110,7 @@ public class AjouterEnseignantController implements Initializable {
         ObservableList<Object> list = FXCollections.observableArrayList(status);
 
         statut.setItems((ObservableList) list);
+        
     }
 
     @FXML
@@ -129,8 +129,8 @@ public class AjouterEnseignantController implements Initializable {
 
     public boolean rienEstVide() {
 
-        if (!id.getText().equals("") && !nom.getText().equals("") && !prenom.getText().equals("") && !adresse.getText().equals("")
-                && !email.getText().equals("") && !telephone.getText().equals("") && !statut.getSelectionModel().getSelectedItem().toString().equals("")) {
+        if (!id.getText().equals("") && !nom.getText().equals("") && !prenom.getText().equals("") && !adresse.getText().equals("") && !email.getText().equals("") && !telephone.getText().equals("") 
+                && !statut.getSelectionModel().isEmpty()) {
             return true;
         } else {
             return false;

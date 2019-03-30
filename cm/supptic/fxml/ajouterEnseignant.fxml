@@ -24,7 +24,7 @@
                            <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="146.0">
                                  <children>
-                                    <JFXTextField fx:id="id" focusColor="#00aff0" labelFloat="true" prefWidth="250.0" promptText="id" />
+                                    <JFXTextField fx:id="id" editable="false" focusColor="#00aff0" labelFloat="true" prefWidth="250.0" promptText="id" />
                                  </children>
                               </HBox>
                               <HBox>
