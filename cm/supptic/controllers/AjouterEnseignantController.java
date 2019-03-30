@@ -9,18 +9,22 @@ import cm.supptic.DAOcontroller.DAOEnseignants;
 import cm.supptic.avoirConnection.AvoirConnection;
 import cm.supptic.managerClass.Enseignant;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 /**
  *
@@ -49,19 +53,46 @@ public class AjouterEnseignantController implements Initializable {
     @FXML
     private JFXComboBox<?> statut;
 
-    private JFXComboBox<?> code_categorie;
+    @FXML
+    private Pane panSnack;
+    @FXML
+    private Text errorText;
 
     @FXML
     void enregistrerCliquer(MouseEvent event) throws SQLException, ClassNotFoundException {
         try {
-            Enseignant enseignant = new Enseignant(id.getText(), nom.getText(), prenom.getText(), adresse.getText(), email.getText(),
-                    Integer.valueOf(telephone.getText()), statut.getSelectionModel().getSelectedItem().toString());
+            if (rienEstVide()) {
+                Enseignant enseignant = new Enseignant(id.getText(), nom.getText(), prenom.getText(), adresse.getText(), email.getText(),
+                        Integer.valueOf(telephone.getText()), statut.getSelectionModel().getSelectedItem().toString());
 
-            new DAOEnseignants().addProduit(enseignant, new AvoirConnection().getConnnection());
-            
+                new DAOEnseignants().addProduit(enseignant, new AvoirConnection().getConnnection());
+
+                JFXSnackbar snac = new JFXSnackbar(this.panSnack);
+                snac.getStyleClass().add("jfx-snackbar-content");
+                snac.show("Nouvel enseigant ajouté avec succès", 5000);
+                vider();
+            } else {
+                new Thread(() -> {
+                    errorText.setVisible(true);
+                    try {
+                        Thread.sleep(5000);
+                        errorText.setVisible(false);
+                    } catch (InterruptedException ex1) {
+                        ex1.printStackTrace();
+                    }
+                }).start();
+            }
+
         } catch (ClassNotFoundException | NumberFormatException | SQLException ex) {
-        Alert alert=new Alert(Alert.AlertType.valueOf("Veillez vérifier vos informatiions"));
-        alert.show();
+            new Thread(() -> {
+                errorText.setVisible(true);
+                try {
+                    Thread.sleep(5000);
+                    errorText.setVisible(false);
+                } catch (InterruptedException ex1) {
+                    ex1.printStackTrace();
+                }
+            }).start();
         }
     }
 
@@ -70,8 +101,8 @@ public class AjouterEnseignantController implements Initializable {
         String[] locales = Locale.getISOCountries();
         ArrayList<String> status = new ArrayList<>();
 
-            status.add("Vacataire");
-            status.add("Permanent");
+        status.add("Vacataire");
+        status.add("Permanent");
 //        for (String countryCode : locales) {
 //            Locale obj = new Locale("fr", countryCode);
 //            pays.add(obj.getDisplayCountry(obj));
@@ -82,7 +113,27 @@ public class AjouterEnseignantController implements Initializable {
         statut.setItems((ObservableList) list);
     }
 
-    public void vider() {
+    @FXML
+    void viderCliquer(MouseEvent event) {
+        vider();
+    }
 
+    public void vider() {
+        nom.setText("");
+        prenom.setText("");
+        adresse.setText("");
+        email.setText("");
+        telephone.setText("");
+        statut.setId("");
+    }
+
+    public boolean rienEstVide() {
+
+        if (!id.getText().equals("") && !nom.getText().equals("") && !prenom.getText().equals("") && !adresse.getText().equals("")
+                && !email.getText().equals("") && !telephone.getText().equals("") && !statut.getSelectionModel().getSelectedItem().toString().equals("")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

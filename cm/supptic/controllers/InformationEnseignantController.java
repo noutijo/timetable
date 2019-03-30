@@ -10,8 +10,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.print.JobSettings;
-import javafx.print.PageLayout;
 import javafx.print.PrinterJob;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.MouseEvent;
