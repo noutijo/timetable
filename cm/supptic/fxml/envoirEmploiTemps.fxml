@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.supptic.controllers.EnvoirEmploiTempsController">
+   <children>
+      <VBox alignment="CENTER" layoutX="3.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane fx:id="panFocus" prefHeight="468.0" prefWidth="931.0" stylesheets="@../styles/tableview.css">
+               <children>
+                  <TableView fx:id="tableEnseignant" prefHeight="437.0" prefWidth="931.0" style="-fx-border-color: #e8e8e8;" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <columns>
+                        <TableColumn fx:id="nomColumn" prefWidth="75.0" text="Noms" />
+                        <TableColumn fx:id="prenomsColumn" prefWidth="75.0" text="Prenoms" />
+                        <TableColumn fx:id="emailColumn" prefWidth="75.0" text="Emails" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <HBox layoutX="583.0" layoutY="473.0" spacing="10.0" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="473.0">
+                     <children>
+                        <JFXButton onMouseClicked="#envoyerCliquer" prefHeight="28.0" prefWidth="86.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #00aff0;" text="Envoyer" textFill="#00aff0" />
+                     </children>
+                  </HBox>
+                  <VBox layoutX="123.0" layoutY="282.0" prefHeight="180.0" prefWidth="259.0" spacing="30.0">
+                     <children>
+                        <JFXTextField prefHeight="25.0" prefWidth="242.0" promptText="de :" />
+                        <JFXTextField labelFloat="true" prefHeight="25.0" prefWidth="242.0" promptText="de :" text="Sujet :" />
+                        <JFXTextArea labelFloat="true" prefHeight="70.0" prefWidth="279.0" promptText="Message :" />
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER" layoutX="518.0" layoutY="290.0" spacing="5.0">
+                     <children>
+                        <JFXTextField editable="false" labelFloat="true" prefHeight="25.0" prefWidth="243.0" promptText="Sélectionner le fichier" />
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/PDF_52px.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -165,19 +165,18 @@ public class DAOEnseignants {
         try {
             myStmt = con.createStatement();
             myRs = myStmt.executeQuery("SELECT * from identifiant");
-
             while (myRs.next()) {
-                id = myRs.getInt("autoIcri");
+                id = myRs.getInt("autoIncri");
             }
-        } catch (Exception ex) {
-        } finally {
-            System.out.println("voila l'idi)");
-        }
 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        System.out.println("voila l'id.");
         return id;
     }
 
-    public void mettreAjoutId   (int id, Connection myConn) throws SQLException {
+    public void mettreAjoutId(int id, Connection myConn) throws SQLException {
 
         PreparedStatement stmnt = null;
 

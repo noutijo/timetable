@@ -16,6 +16,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -55,6 +57,7 @@ public class AjouterEnseignantController implements Initializable {
     private Pane panSnack;
     @FXML
     private Text errorText;
+    int idLocal = 0;
 
     @FXML
     void enregistrerCliquer(MouseEvent event) throws SQLException, ClassNotFoundException {
@@ -69,6 +72,16 @@ public class AjouterEnseignantController implements Initializable {
                 JFXSnackbar snac = new JFXSnackbar(this.panSnack);
                 snac.getStyleClass().add("jfx-snackbar-content");
                 snac.show("Nouvel enseigant ajouté avec succès", 5000);
+
+                try {
+                    new DAOEnseignants().mettreAjoutId(idLocal, new AvoirConnection().getConnnection());
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                } finally {
+                    idLocal = new DAOEnseignants().getINouveauId(new AvoirConnection().getConnnection());
+                    id.setText(String.valueOf(idLocal));
+                }
+
                 vider();
             } catch (ClassNotFoundException | NumberFormatException | SQLException ex) {
                 new Thread(() -> {
@@ -102,15 +115,16 @@ public class AjouterEnseignantController implements Initializable {
 
         status.add("Vacataire");
         status.add("Permanent");
-//        for (String countryCode : locales) {
-//            Locale obj = new Locale("fr", countryCode);
-//            pays.add(obj.getDisplayCountry(obj));
-//
-//        }
+
         ObservableList<Object> list = FXCollections.observableArrayList(status);
 
         statut.setItems((ObservableList) list);
-        
+        try {
+            idLocal = new DAOEnseignants().getINouveauId(new AvoirConnection().getConnnection());
+            id.setText(String.valueOf(idLocal));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
@@ -124,12 +138,11 @@ public class AjouterEnseignantController implements Initializable {
         adresse.setText("");
         email.setText("");
         telephone.setText("");
-        statut.setId("");
     }
 
     public boolean rienEstVide() {
 
-        if (!id.getText().equals("") && !nom.getText().equals("") && !prenom.getText().equals("") && !adresse.getText().equals("") && !email.getText().equals("") && !telephone.getText().equals("") 
+        if (!nom.getText().equals("") && !prenom.getText().equals("") && !adresse.getText().equals("") && !email.getText().equals("") && !telephone.getText().equals("")
                 && !statut.getSelectionModel().isEmpty()) {
             return true;
         } else {
