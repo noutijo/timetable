@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -11,14 +12,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.supptic.controllers.EnvoirEmploiTempsController">
+<AnchorPane prefHeight="598.0" prefWidth="951.0" style="-fx-background-color: white;" stylesheets="@../styles/tableview.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.supptic.controllers.EnvoirEmploiTempsController">
    <children>
-      <VBox alignment="CENTER" layoutX="3.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="98.0" layoutY="33.0" style="-fx-background-color: white; -fx-border-color: #00aff0; -fx-border-radius: 50px;" AnchorPane.leftAnchor="98.0" AnchorPane.topAnchor="30.0">
          <children>
-            <AnchorPane fx:id="panFocus" prefHeight="468.0" prefWidth="931.0" stylesheets="@../styles/tableview.css">
+            <JFXTextField fx:id="nomRecherche" focusColor="WHITE" layoutX="14.0" layoutY="2.0" onKeyPressed="#rechercheEvoyerPressed" prefHeight="25.0" prefWidth="179.0" unFocusColor="WHITE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="2.0" />
+            <HBox alignment="CENTER" layoutX="213.0" layoutY="1.0" onMouseClicked="#rechercheCliquer" style="-fx-background-radius: 0px 50px 50px 0px; -fx-background-color: #f1f1f1;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <TableView fx:id="tableEnseignant" prefHeight="437.0" prefWidth="931.0" style="-fx-border-color: #e8e8e8;" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/Search_52px.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <VBox alignment="CENTER" layoutX="3.0" layoutY="80.0" prefHeight="513.0" prefWidth="931.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <AnchorPane fx:id="panFocus" prefHeight="468.0" prefWidth="931.0">
+               <children>
+                  <TableView fx:id="tableEnseignant" onMouseClicked="#tableauCliquer" prefHeight="437.0" prefWidth="931.0" style="-fx-border-color: #e8e8e8;" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columns>
                         <TableColumn fx:id="nomColumn" prefWidth="75.0" text="Noms" />
                         <TableColumn fx:id="prenomsColumn" prefWidth="75.0" text="Prenoms" />
@@ -28,28 +48,45 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <HBox layoutX="583.0" layoutY="473.0" spacing="10.0" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="473.0">
+                  <HBox layoutX="712.0" layoutY="449.0" spacing="10.0" AnchorPane.bottomAnchor="56.0" AnchorPane.rightAnchor="133.0" AnchorPane.topAnchor="449.0" />
+                  <VBox layoutX="128.0" layoutY="296.0" prefHeight="180.0" prefWidth="259.0" spacing="30.0">
                      <children>
-                        <JFXButton onMouseClicked="#envoyerCliquer" prefHeight="28.0" prefWidth="86.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #00aff0;" text="Envoyer" textFill="#00aff0" />
-                     </children>
-                  </HBox>
-                  <VBox layoutX="123.0" layoutY="282.0" prefHeight="180.0" prefWidth="259.0" spacing="30.0">
-                     <children>
-                        <JFXTextField prefHeight="25.0" prefWidth="242.0" promptText="de :" />
-                        <JFXTextField labelFloat="true" prefHeight="25.0" prefWidth="242.0" promptText="de :" text="Sujet :" />
-                        <JFXTextArea labelFloat="true" prefHeight="70.0" prefWidth="279.0" promptText="Message :" />
+                        <JFXTextField fx:id="expediteurText" labelFloat="true" prefHeight="25.0" prefWidth="242.0" promptText="Expéditeur :" />
+                        <JFXTextField fx:id="sujetText" labelFloat="true" prefHeight="25.0" prefWidth="242.0" promptText="Sujet :" text="Emploi de temps" />
+                        <JFXTextArea fx:id="messageArea" labelFloat="true" prefHeight="45.0" prefWidth="259.0" promptText="Message :" />
                      </children>
                   </VBox>
-                  <HBox alignment="CENTER" layoutX="518.0" layoutY="290.0" spacing="5.0">
+                  <VBox layoutX="523.0" layoutY="296.0" spacing="30.0">
                      <children>
-                        <JFXTextField editable="false" labelFloat="true" prefHeight="25.0" prefWidth="243.0" promptText="Sélectionner le fichier" />
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/PDF_52px.png" />
-                           </image>
-                        </ImageView>
+                        <JFXTextField fx:id="destinaireText" editable="false" labelFloat="true" opacity="0.5" prefHeight="25.0" prefWidth="243.0" promptText="Destinaire :" />
+                        <HBox alignment="CENTER" spacing="5.0">
+                           <children>
+                              <JFXTextField fx:id="selectionText" editable="false" labelFloat="true" opacity="0.5" prefHeight="25.0" prefWidth="243.0" promptText="Sélectionner le fichier" />
+                              <VBox alignment="CENTER" onMouseClicked="#selectionnerFichierPDFCliquer" style="-fx-background-radius: 100px; -fx-border-radius: 100px; -fx-border-color: #ceebf6;" styleClass="actualiser">
+                                 <children>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/PDF_52px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </VBox>
+                           </children>
+                        </HBox>
                      </children>
-                  </HBox>
+                  </VBox>
+                  <JFXButton layoutX="712.0" layoutY="448.0" onMouseClicked="#envoyerCliquer" prefHeight="28.0" prefWidth="86.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #00aff0;" text="Envoyer" textFill="#00aff0" />
+                  <Text fx:id="alertEnvoyer" fill="#d33321" layoutX="523.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
                </children>
                <padding>
                   <Insets bottom="10.0" />
@@ -57,5 +94,22 @@
             </AnchorPane>
          </children>
       </VBox>
+      <VBox alignment="CENTER" layoutX="35.0" layoutY="44.0" onMouseClicked="#actualiserCliquer" style="-fx-background-radius: 100px; -fx-border-radius: 100px; -fx-border-color: #ceebf6;" styleClass="actualiser" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="30.0">
+         <children>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/Refresh_64px.png" />
+               </image>
+            </ImageView>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+      <Text fx:id="errorText" fill="#00aff0" layoutX="458.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veillez vérifier vos informations." visible="false">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

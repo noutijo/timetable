@@ -39,6 +39,13 @@ public class Enseignant {
         this.statut_enseignant = statut_enseignant;
     }
 
+    public Enseignant(String nom_enseignant, String prenom_enseignant, String email_enseignant) {
+        this.nom_enseignant = nom_enseignant;
+        this.prenom_enseignant = prenom_enseignant;
+        this.email_enseignant = email_enseignant;
+
+    }
+
     public String getId_enseignant() {
         return id_enseignant;
     }

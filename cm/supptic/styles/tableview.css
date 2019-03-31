@@ -127,3 +127,8 @@
     -fx-font-size:13px;
 }
 
+/**Actualiser **/
+
+.actualiser:hover{
+    -fx-background-color: #f1f1f1;
+}

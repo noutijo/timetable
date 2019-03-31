@@ -40,6 +40,11 @@ public class AcceuilController implements Initializable {
     private HBox loading;
     @FXML
     private ImageView imageMaxMin;
+    @FXML
+    private VBox panneauPrincipalTablirEmploi;
+
+    @FXML
+    private VBox panneauPrincipalEnvoyerEmploiTemps;
 
     @FXML
     void bareDragged(MouseEvent event) {
@@ -99,6 +104,7 @@ public class AcceuilController implements Initializable {
         Image im = new Image(getClass().getResource("/cm/supptic/images/logo_supptic.jpg").toString());
         circleLogo.setFill(new ImagePattern(im));
         ChangeDansLesPanneaux(panneauPrincipalEnseignant, "affichargeEnseignants");
+        ChangeDansLesPanneaux(panneauPrincipalEnvoyerEmploiTemps, "envoirEmploiTemps");
 
     }
 

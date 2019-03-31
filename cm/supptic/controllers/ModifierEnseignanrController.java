@@ -10,6 +10,7 @@ import cm.supptic.avoirConnection.AvoirConnection;
 import cm.supptic.managerClass.Enseignant;
 import cm.supptic.subclass.TempEnseignant;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.sql.SQLException;
@@ -22,6 +23,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 /**
  *
@@ -49,25 +52,72 @@ public class ModifierEnseignanrController implements Initializable {
 
     @FXML
     private JFXComboBox<?> statut;
-
     @FXML
-    private JFXComboBox<?> code_categorie;
+    private Pane panSnack;
+    @FXML
+    private Text errorText;
 
     @FXML
     void closeFenModifierCliquer(MouseEvent event) {
         BoxBlur ff = new BoxBlur(0, 0, 0);
         VoirListeEnseignantController.panFocuss.setEffect(ff);
         VoirListeEnseignantController.diaglogFocus.close();
+
     }
 
     //Enregistrer les modifications
     @FXML
     void enregistrerModificationCliquer(MouseEvent event) throws SQLException, ClassNotFoundException {
-        
-        Enseignant enseignant = new Enseignant(id.getText(), nom.getText(), prenom.getText(), adresse.getText(), email.getText(),
-                Integer.valueOf(telephone.getText()), statut.getSelectionModel().getSelectedItem().toString());
 
-        new DAOEnseignants().modifierEnseignant(enseignant, new AvoirConnection().getConnnection());
+        if (rienEstVide()) {
+            try {
+
+                Enseignant enseignant = new Enseignant(id.getText(), nom.getText(), prenom.getText(), adresse.getText(), email.getText(),
+                        Integer.valueOf(telephone.getText()), statut.getSelectionModel().getSelectedItem().toString());
+
+                new DAOEnseignants().modifierEnseignant(enseignant, new AvoirConnection().getConnnection());
+
+                JFXSnackbar snac = new JFXSnackbar(this.panSnack);
+                snac.getStyleClass().add("jfx-snackbar-content");
+                snac.show("Modifier avec succès", 5000);
+
+                //A la fin de la modification on recharge la table
+            } catch (ClassNotFoundException | NumberFormatException | SQLException ex) {
+                new Thread(() -> {
+                    errorText.setVisible(true);
+                    try {
+                        Thread.sleep(5000);
+                        errorText.setVisible(false);
+                    } catch (InterruptedException ex1) {
+                        ex1.printStackTrace();
+                    }
+                }).start();
+            }
+        } else {
+            new Thread(() -> {
+                errorText.setVisible(true);
+                try {
+                    Thread.sleep(5000);
+                    errorText.setVisible(false);
+                } catch (InterruptedException ex1) {
+                    ex1.printStackTrace();
+                }
+            }).start();
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean rienEstVide() {
+
+        if (!nom.getText().equals("") && !prenom.getText().equals("") && !adresse.getText().equals("") && !email.getText().equals("") && !telephone.getText().equals("")
+                && !statut.getSelectionModel().isEmpty() && email.getText().contains("@")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     //Chargement lors du demarrage pour la modification

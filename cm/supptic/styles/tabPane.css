@@ -111,3 +111,10 @@
 #t1,#t2,#t3,#t4{
 	-fx-fill: #6f7279;
 }
+
+
+/**deconnexion
+*/
+.decon:hover{
+    -fx-background-color: #f1f1f1
+}

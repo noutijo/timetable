@@ -72,8 +72,7 @@ public class AjouterEnseignantController implements Initializable {
                 JFXSnackbar snac = new JFXSnackbar(this.panSnack);
                 snac.getStyleClass().add("jfx-snackbar-content");
                 snac.show("Nouvel enseigant ajouté avec succès", 5000);
-
-                try {
+                                try {
                     new DAOEnseignants().mettreAjoutId(idLocal, new AvoirConnection().getConnnection());
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -143,7 +142,7 @@ public class AjouterEnseignantController implements Initializable {
     public boolean rienEstVide() {
 
         if (!nom.getText().equals("") && !prenom.getText().equals("") && !adresse.getText().equals("") && !email.getText().equals("") && !telephone.getText().equals("")
-                && !statut.getSelectionModel().isEmpty()) {
+                && !statut.getSelectionModel().isEmpty() && email.getText().contains("@")) {
             return true;
         } else {
             return false;

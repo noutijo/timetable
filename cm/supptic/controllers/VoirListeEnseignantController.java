@@ -21,7 +21,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXSnackbar;
+import com.jfoenix.controls.JFXTextField;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -38,11 +38,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
@@ -81,13 +83,20 @@ public class VoirListeEnseignantController implements Initializable {
     private Pane panSnackbar;
     String idSupprimer;
     public static TempEnseignant enseignaneAModifier = null;
+    @FXML
+    private JFXTextField nomRecherche;
+    @FXML
+    private Text demandeUneSelection;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ChargementableEnseignant();
     }
 
-    private void ChargementableEnseignant() {
+    /**
+     *
+     */
+    public void ChargementableEnseignant() {
 
         //Chargement de la table enseignant lors du démarrage
         try {
@@ -98,33 +107,41 @@ public class VoirListeEnseignantController implements Initializable {
         }
     }
 
-    //Nous voulons supprimer un enseignant
     @FXML
-    void supprimerCliquer(MouseEvent event) {
-        try {
-            new DAOEnseignants().effacerProduit(retourneId(), new AvoirConnection().getConnnection());
-            this.idSupprimer = retourneId();
-            ChargementableEnseignant();
-        } catch (SQLException | ClassNotFoundException ex) {
-            ex.printStackTrace();
-        } finally {
-//            ChargementableEnseignant();
-//            JFXSnackbar snac = new JFXSnackbar(this.panSnackbar);
-//            snac.getStyleClass().add("jfx-snackbar-content");
-//            snac.show("Enseignant ayant pour id :" + this.idSupprimer + "suppmer avec succès", 5000);
-
-            NotificationType notification = NotificationType.CUSTOM;
-
-            TrayNotification tray = new TrayNotification();
-            tray.setTitle("Confirmation de suppression");
-            tray.setImage(new Image(getClass().getResource("/cm/supptic/images/logo_supptic.jpg").toString()));
-            tray.setMessage("Enseignant dont id :" + this.idSupprimer + " supprimer avec succès");
-            tray.setNotificationType(notification);
-            tray.showAndDismiss(Duration.millis(5000));
-        }
-
+    void actualiserCliquer(MouseEvent event) {
+        ChargementableEnseignant();
     }
 
+    //Nous voulons supprimer un enseignant
+    @FXML
+    void supprimerCliquer(MouseEvent event) throws Exception {
+        if (retourneId() == null) {
+
+        } else {
+            confirmeLaSuppression(retourneId());
+        }
+    }
+
+    /**
+     *
+     * @param id
+     * @throws SQLException
+     */
+    public void confirmeLaSuppression(String id) throws Exception {
+
+        new DAOEnseignants().effacerProduit(id, new AvoirConnection().getConnnection());
+
+        NotificationType notification = NotificationType.CUSTOM;
+
+        TrayNotification tray = new TrayNotification();
+        tray.setTitle("Confirmation de suppression");
+        tray.setImage(new Image(getClass().getResource("/cm/supptic/images/logo_supptic.jpg").toString()));
+        tray.setMessage("Enseignant dont id :" + id + " supprimer avec succès");
+        tray.setNotificationType(notification);
+        tray.showAndDismiss(Duration.millis(5000));
+        ChargementableEnseignant();
+
+    }
     //Modifier un enseignant
     public static JFXDialog diaglogFocus;
     @FXML
@@ -233,28 +250,82 @@ public class VoirListeEnseignantController implements Initializable {
 
     //chargement du focus
     private void ChargePanFocue(String fxmlPath) throws IOException {
-        //inialisons le panfoncus public
-        this.panFocuss = panFocus;
-        //Creation de l'objet enseignant pour gerer les affichesndes differents view blur demandés a chaque interaction avec les deux buttons infos et modifier 
-        Enseignant itemSelectionne = this.tableEnseignant.getItems().get(this.tableEnseignant.getSelectionModel().getSelectedIndex());
-        this.enseignaneAModifier = new TempEnseignant(itemSelectionne);
-        //l'effet de rendre les choses  un peu flou apres la demande de l'affichage de l'outil d'aide ou les informations sur le constructeur de l'application
-        BoxBlur ff = new BoxBlur(10.0, 10.0, 1);
-        panFocus.setEffect(ff);
-        Region root = FXMLLoader.load(getClass().getResource("/cm/supptic/fxml/" + fxmlPath));
-        diaglogFocus = new JFXDialog(panStackFocus, root, JFXDialog.DialogTransition.CENTER);
-        //dia.setBackground(Background.EMPTY);
-        diaglogFocus.setOverlayClose(false);
-        diaglogFocus.show();
+        try {
+            //inialisons le panfoncus public
+            this.panFocuss = panFocus;
+            //Creation de l'objet enseignant pour gerer les affichesndes differents view blur demandés a chaque interaction avec les deux buttons infos et modifier 
+            Enseignant itemSelectionne = this.tableEnseignant.getItems().get(this.tableEnseignant.getSelectionModel().getSelectedIndex());
+            this.enseignaneAModifier = new TempEnseignant(itemSelectionne);
+            //l'effet de rendre les choses  un peu flou apres la demande de l'affichage de l'outil d'aide ou les informations sur le constructeur de l'application
+            BoxBlur ff = new BoxBlur(10.0, 10.0, 1);
+            panFocus.setEffect(ff);
+            Region root = FXMLLoader.load(getClass().getResource("/cm/supptic/fxml/" + fxmlPath));
+            diaglogFocus = new JFXDialog(panStackFocus, root, JFXDialog.DialogTransition.CENTER);
+            //dia.setBackground(Background.EMPTY);
+            diaglogFocus.setOverlayClose(false);
+            diaglogFocus.show();
+        } catch (Exception e) {
+            new Thread(() -> {
+                demandeUneSelection.setVisible(true);
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+                demandeUneSelection.setVisible(false);
+            }).start();
+        }
+
     }
 
     //retourn ID selectionner
+    /**
+     *
+     * @return
+     */
     private String retourneId() {
-        this.idSupprimer = this.tableEnseignant.getSelectionModel().getSelectedItem().getId_enseignant();
-        return tableEnseignant.getSelectionModel().getSelectedItem().getId_enseignant();
+        String id = null;
+        try {
+            this.idSupprimer = this.tableEnseignant.getSelectionModel().getSelectedItem().getId_enseignant();
+            id = this.tableEnseignant.getSelectionModel().getSelectedItem().getId_enseignant();
+
+        } catch (Exception e) {
+            new Thread(() -> {
+                demandeUneSelection.setVisible(true);
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException ex1) {
+                }
+                demandeUneSelection.setVisible(false);
+            }).start();
+        }
+        return id;
+    }
+
+    @FXML
+    void recherchePressed(KeyEvent event) {
+        loadsearch();
+    }
+
+    @FXML
+    void rechercheCliquer(MouseEvent event) {
+        loadsearch();
+    }
+
+    public void loadsearch() {
+        try {
+            ObservableList<Enseignant> data = FXCollections.observableArrayList(new DAOEnseignants().searchEnseigants(nomRecherche.getText(), new AvoirConnection().getConnnection()));
+            chargerEnsembleEnseignants(data);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     //Charger les enseignants dans le tableau
+    /**
+     *
+     * @param data
+     */
     public void chargerEnsembleEnseignants(ObservableList<Enseignant> data) {
         try {
             //chargement de la table des enseignants au niveau de l'interface apres la demande de la liste des enseignants
@@ -265,10 +336,11 @@ public class VoirListeEnseignantController implements Initializable {
             emailColumn.setCellValueFactory(new PropertyValueFactory<>("email_enseignant"));
             telephoneColumn.setCellValueFactory(new PropertyValueFactory<>("telephone"));
             statutColumn.setCellValueFactory(new PropertyValueFactory<>("statut_enseignant"));
-        
+
             tableEnseignant.setItems(data);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
+
 }

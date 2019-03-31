@@ -10,9 +10,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="858.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.supptic.controllers.ModifierEnseignanrController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="858.0" stylesheets="@../styles/snackBarStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.supptic.controllers.ModifierEnseignanrController">
    <children>
       <HBox alignment="CENTER" layoutX="152.0" layoutY="154.0" prefHeight="202.0" prefWidth="634.0" spacing="100.0" AnchorPane.bottomAnchor="174.0" AnchorPane.leftAnchor="152.0" AnchorPane.rightAnchor="151.0" AnchorPane.topAnchor="154.0">
          <children>
@@ -20,7 +21,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="146.0">
                      <children>
-                        <JFXTextField fx:id="id" editable="false" focusColor="#00aff0" labelFloat="true" prefWidth="250.0" promptText="id" />
+                        <JFXTextField fx:id="id" editable="false" focusColor="#00aff0" labelFloat="true" opacity="0.5" prefWidth="250.0" promptText="id" />
                      </children>
                   </HBox>
                   <HBox>
@@ -35,7 +36,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="146.0">
                      <children>
-                        <JFXTextField fx:id="adresse" focusColor="#00aff0" labelFloat="true" prefWidth="250.0" promptText="Adress" />
+                        <JFXTextField fx:id="adresse" focusColor="#00aff0" labelFloat="true" prefWidth="250.0" promptText="Adresse" />
                      </children>
                   </HBox>
                </children>
@@ -101,5 +102,11 @@
          </image>
       </ImageView>
       <Separator layoutX="100.0" layoutY="377.0" opacity="0.5" prefWidth="200.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="0.0" />
+      <Pane fx:id="panSnack" layoutX="75.0" layoutY="383.0" prefHeight="16.0" prefWidth="200.0" AnchorPane.bottomAnchor="1.0" />
+      <Text fx:id="errorText" fill="#e12a12" layoutX="340.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veillez vérifier vos informations" visible="false">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

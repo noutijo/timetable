@@ -80,6 +80,93 @@ public class DAOEnseignants {
         }
     }
 
+    /**
+     * retoune le mom prenome temail
+     *
+     * @param myConn
+     * @return
+     * @throws Exception
+     */
+    public List<Enseignant> getNomsPreEmailEnseignants(Connection myConn) throws Exception {
+
+        List<Enseignant> list = new ArrayList<>();
+
+        Statement myStmt = null;
+        ResultSet myRs = null;
+
+        try {
+            myStmt = myConn.createStatement();
+            myRs = myStmt.executeQuery("select * from enseignant");
+            while (myRs.next()) {
+                Enseignant tempEnseignant = convertRowToEnseignantEnvoir(myRs);
+                list.add(tempEnseignant);
+            }
+            return list;
+
+        } finally {
+            myConn.close();
+            myStmt.close();
+            System.out.println("Voilà la liste nom pre em:)");
+        }
+    }
+
+    /**
+     *
+     * @param nomARecherche
+     * @param myConn
+     * @return
+     * @throws Exception
+     */
+    public List<Enseignant> searchEnseigants(String nomARecherche, Connection myConn) throws Exception {
+        List<Enseignant> list = new ArrayList<>();
+
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+
+        try {
+            nomARecherche += "%";
+            myStmt = myConn.prepareStatement("select * from enseignant where nom_enseignant like ?");
+
+            myStmt.setString(1, nomARecherche);
+
+            myRs = myStmt.executeQuery();
+
+            while (myRs.next()) {
+                Enseignant tempEmployee = convertRowToEnseignant(myRs);
+                list.add(tempEmployee);
+            }
+
+            return list;
+        } finally {
+            System.out.println("Rechercher coorect :)");
+        }
+    }
+    
+    public List<Enseignant> searchEnseigantsEvoyerMail(String nomARecherche, Connection myConn) throws Exception {
+        List<Enseignant> list = new ArrayList<>();
+
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+
+        try {
+            nomARecherche += "%";
+            myStmt = myConn.prepareStatement("select * from enseignant where nom_enseignant like ?");
+
+            myStmt.setString(1, nomARecherche);
+
+            myRs = myStmt.executeQuery();
+
+            while (myRs.next()) {
+                Enseignant tempEmployee = convertRowToEnseignantEnvoir(myRs);
+                list.add(tempEmployee);
+            }
+
+            return list;
+        } finally {
+            System.out.println("Rechercher coorect :)");
+        }
+    }
+
     //Pour supprimer un enseignant
     /**
      *
@@ -157,6 +244,28 @@ public class DAOEnseignants {
         return tempEnseignant;
     }
 
+    /**
+     *
+     * @param myRs
+     * @return
+     * @throws SQLException
+     */
+    private Enseignant convertRowToEnseignantEnvoir(ResultSet myRs) throws SQLException {
+
+        String nom = myRs.getString("nom_enseignant");
+        String prenom = myRs.getString("prenom_enseignant");
+        String email = myRs.getString("email_enseignant");
+
+        Enseignant tempEnseignant = new Enseignant(nom, prenom, email);
+
+        return tempEnseignant;
+    }
+
+    /**
+     *
+     * @param con
+     * @return
+     */
     public int getINouveauId(Connection con) {
 
         Statement myStmt = null;
