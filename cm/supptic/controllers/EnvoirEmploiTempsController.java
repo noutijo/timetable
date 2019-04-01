@@ -132,10 +132,9 @@ public class EnvoirEmploiTempsController implements Initializable {
     private void selectionnerFichierPDFCliquer(MouseEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Fichier", "*.pdf", "*.docx"));
-        if (!(fichierSelectionne == null)) {
-            String path = this.fichierSelectionne.getCanonicalPath();
-            path = path.substring(0, path.lastIndexOf("\\"));
-            fileChooser.setInitialDirectory(new File(path));
+        if (!(this.selectionText.getText().isEmpty())) {
+            fileChooser.setInitialDirectory(new File(this.selectionText.getText().substring(0, this.selectionText.getText().lastIndexOf("\\"))));
+        } else {
         }
 
         this.fichierSelectionne = fileChooser.showOpenDialog(null);
