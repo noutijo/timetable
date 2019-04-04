@@ -131,18 +131,15 @@ public class ModifierEnseignanrController implements Initializable {
         email.setText(enseignantAModifier.getTempEnseignant().getEmail_enseignant());
         telephone.setText(String.valueOf(enseignantAModifier.getTempEnseignant().getTelephone()));
 
-        String[] locales = Locale.getISOCountries();
-        ArrayList<String> status = new ArrayList<>();
+       ArrayList<String> status = new ArrayList<>();
         status.add("Vacataire");
         status.add("Permanent");
-//        for (String countryCode : locales) {
-//            Locale obj = new Locale("fr", countryCode);
-//            pays.add(obj.getDisplayCountry(obj));
-//
-//        }
+
         ObservableList<Object> list = FXCollections.observableArrayList(status);
 
         statut.setItems((ObservableList) list);
+        statut.getSelectionModel().selectFirst();
+
     }
 
 }

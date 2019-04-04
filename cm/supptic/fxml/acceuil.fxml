@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXNodesList?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -64,31 +65,12 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="1011.0" layoutY="60.0" onMouseClicked="#deconnexion" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 100px; -fx-border-radius: 100px; -fx-border-color: #ceebf6;" styleClass="decon" AnchorPane.rightAnchor="147.0" AnchorPane.topAnchor="60.0">
-               <children>
-                  <ImageView fitHeight="15.0" fitWidth="15.0" opacity="0.35" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/Logout%20Rounded%20Down_52px.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </ImageView>
-               </children>
-               <padding>
-                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-               </padding>
-            </HBox>
             <Circle fx:id="circleLogo" fill="WHITE" layoutX="51.0" layoutY="76.0" radius="28.0" stroke="#f2eeee" strokeDashOffset="5.0" strokeMiterLimit="20.0" strokeType="INSIDE">
                <effect>
                   <DropShadow color="#f7f7f7" />
                </effect>
             </Circle>
-            <Text fill="#6e6e6e" layoutX="1048.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Déconnexion" AnchorPane.rightAnchor="65.919921875" AnchorPane.topAnchor="66.05078125">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Text>
+            <JFXNodesList fx:id="nodeListe" alignment="CENTER" layoutX="1048.0" layoutY="50.0" prefHeight="4.0" prefWidth="30.0" rotate="90.0" spacing="7.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="55.0" />
          </children>
       </AnchorPane>
       <TabPane id="tabPane" layoutX="10.0" layoutY="157.0" prefHeight="560.0" prefWidth="1172.0" side="LEFT" style="-fx-border-color: #f8f9fc;" styleClass="tabPane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="120.0">

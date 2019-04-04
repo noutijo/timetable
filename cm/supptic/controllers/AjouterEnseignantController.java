@@ -51,7 +51,7 @@ public class AjouterEnseignantController implements Initializable {
     private JFXTextField telephone;
 
     @FXML
-    private JFXComboBox<?> statut;
+    private JFXComboBox<String> statut;
 
     @FXML
     private Pane panSnack;
@@ -118,6 +118,8 @@ public class AjouterEnseignantController implements Initializable {
         ObservableList<Object> list = FXCollections.observableArrayList(status);
 
         statut.setItems((ObservableList) list);
+        statut.getSelectionModel().selectFirst();
+        
         try {
             idLocal = new DAOEnseignants().getINouveauId(new AvoirConnection().getConnnection());
             id.setText(String.valueOf(idLocal));

@@ -201,10 +201,7 @@ public class VoirListeEnseignantController implements Initializable {
             c1.setBackgroundColor(BaseColor.DARK_GRAY);
             c1.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(c1);
-            c1 = new PdfPCell(new Phrase("Code catégories"));
-            c1.setBackgroundColor(BaseColor.DARK_GRAY);
-            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-            table.addCell(c1);
+            
             //On spécifie que la table apres chaque aller de la page suivante doit reddéfinir l'entête d'identification des differentes tâches de la table 
             table.setHeaderRows(1);
 

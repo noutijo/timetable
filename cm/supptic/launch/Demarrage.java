@@ -25,7 +25,7 @@ public class Demarrage extends Application {
     public void start(Stage stage) throws Exception {
 
         stageStatic = stage;
-        AnchorPane pan = FXMLLoader.load(getClass().getResource("/cm/supptic/fxml/acceuil.fxml"));
+        AnchorPane pan = FXMLLoader.load(getClass().getResource("/cm/supptic/fxml/login.fxml"));
 
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initStyle(StageStyle.TRANSPARENT);
