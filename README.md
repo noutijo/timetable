@@ -1,2 +1,2 @@
 # timetable
-Application permettant de générer les emplois de temps
+Application to generate timetables.
