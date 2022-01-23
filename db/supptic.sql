@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 28, 2019 at 12:18 AM
--- Server version: 5.7.14
--- PHP Version: 5.6.25
+-- Host: 127.0.0.1:3306
+-- Generation Time: Jan 22, 2022 at 11:46 PM
+-- Server version: 5.7.23
+-- PHP Version: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -26,11 +28,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `categorie`
 --
 
-CREATE TABLE `categorie` (
+DROP TABLE IF EXISTS `categorie`;
+CREATE TABLE IF NOT EXISTS `categorie` (
   `code_categorie` char(5) NOT NULL,
   `taux_tp` int(11) NOT NULL,
   `taux_td` int(11) NOT NULL,
-  `taux_cm` int(11) NOT NULL
+  `taux_cm` int(11) NOT NULL,
+  PRIMARY KEY (`code_categorie`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -39,9 +43,11 @@ CREATE TABLE `categorie` (
 -- Table structure for table `classe`
 --
 
-CREATE TABLE `classe` (
+DROP TABLE IF EXISTS `classe`;
+CREATE TABLE IF NOT EXISTS `classe` (
   `code_classe` char(5) NOT NULL,
-  `nom_classe` char(15) NOT NULL
+  `nom_classe` char(15) NOT NULL,
+  PRIMARY KEY (`code_classe`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -50,11 +56,14 @@ CREATE TABLE `classe` (
 -- Table structure for table `cours`
 --
 
-CREATE TABLE `cours` (
+DROP TABLE IF EXISTS `cours`;
+CREATE TABLE IF NOT EXISTS `cours` (
   `code_cours` char(5) NOT NULL,
   `nom_cours` char(30) NOT NULL,
   `nature_cours` char(30) NOT NULL,
-  `code_salle` char(5) DEFAULT NULL
+  `code_salle` char(5) DEFAULT NULL,
+  PRIMARY KEY (`code_cours`),
+  KEY `code_salle` (`code_salle`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -63,8 +72,10 @@ CREATE TABLE `cours` (
 -- Table structure for table `dates`
 --
 
-CREATE TABLE `dates` (
-  `periodes` date NOT NULL
+DROP TABLE IF EXISTS `dates`;
+CREATE TABLE IF NOT EXISTS `dates` (
+  `periodes` date NOT NULL,
+  PRIMARY KEY (`periodes`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -73,12 +84,18 @@ CREATE TABLE `dates` (
 -- Table structure for table `dipenser`
 --
 
-CREATE TABLE `dipenser` (
+DROP TABLE IF EXISTS `dipenser`;
+CREATE TABLE IF NOT EXISTS `dipenser` (
   `code_cours` char(20) NOT NULL,
   `periodes` date NOT NULL,
   `code_plage` char(5) NOT NULL,
   `id_enseignant` char(5) NOT NULL,
-  `code_salle` char(10) NOT NULL
+  `code_salle` char(10) NOT NULL,
+  PRIMARY KEY (`code_cours`,`periodes`,`code_plage`,`id_enseignant`,`code_salle`),
+  KEY `code_salle` (`code_salle`),
+  KEY `periodes` (`periodes`),
+  KEY `code_plage` (`code_plage`),
+  KEY `id_enseignant` (`id_enseignant`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -87,12 +104,18 @@ CREATE TABLE `dipenser` (
 -- Table structure for table `effectuer`
 --
 
-CREATE TABLE `effectuer` (
+DROP TABLE IF EXISTS `effectuer`;
+CREATE TABLE IF NOT EXISTS `effectuer` (
   `id_tp` char(5) NOT NULL,
   `code_laboratoire` char(5) NOT NULL,
   `id_enseignant` char(30) NOT NULL,
   `periodes` date NOT NULL,
-  `id_groupe` char(5) NOT NULL
+  `id_groupe` char(5) NOT NULL,
+  PRIMARY KEY (`id_tp`,`code_laboratoire`,`id_enseignant`,`periodes`,`id_groupe`),
+  KEY `code_laboratoire` (`code_laboratoire`),
+  KEY `id_enseignant` (`id_enseignant`),
+  KEY `periodes` (`periodes`),
+  KEY `id_groupe` (`id_groupe`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -101,7 +124,8 @@ CREATE TABLE `effectuer` (
 -- Table structure for table `enseignant`
 --
 
-CREATE TABLE `enseignant` (
+DROP TABLE IF EXISTS `enseignant`;
+CREATE TABLE IF NOT EXISTS `enseignant` (
   `id_enseignant` char(5) NOT NULL,
   `nom_enseignant` char(30) NOT NULL,
   `prenom_enseignant` char(30) NOT NULL,
@@ -109,50 +133,21 @@ CREATE TABLE `enseignant` (
   `email_enseignant` char(30) NOT NULL,
   `telephone_enseignant` int(11) NOT NULL,
   `statut_enseignant` char(30) NOT NULL,
-  `code_categorie` char(5) DEFAULT NULL
+  PRIMARY KEY (`id_enseignant`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `enseignant`
 --
 
-INSERT INTO `enseignant` (`id_enseignant`, `nom_enseignant`, `prenom_enseignant`, `add_enseignant`, `email_enseignant`, `telephone_enseignant`, `statut_enseignant`, `code_categorie`) VALUES
-('JUU', 'Ngoufack', 'Ursem', 'EmanaII', 'ursemngoufack@gmail.com', 695825524, 'Cuba', 'Chili'),
-('EN011', 'Noumo', 'oreo', 'Canada', 'j@hhd', 6522155, 'Cuba', 'Inde'),
-('EN004', 'Noumodong Tindjong', 'Junior-Oréol', 'Canada', 'oreolnoumodong@gmail.com', 690079333, 'Chili', 'Chili'),
-('EN5', 'Noumo', 'oreo', 'Canada', 'j@hhd', 6522155, 'Cuba', 'Inde'),
-('JUT', 'Ngoufack', 'Ursem', 'EmanaII', 'ursemngoufack@gmail.com', 695825524, 'Cuba', 'Chili'),
-('LEN7', 'Noumodong', 'Junior-Oréol', 'Canada', 'oreolnoumodong@gmail.com', 690079333, 'Cuba', 'Togo'),
-('LEN6', 'Noumodong', 'Junior-Oréol', 'Canada', 'oreolnoumodong@gmail.com', 690079333, 'Cuba', 'Togo'),
-('LEN5', 'Noumodong', 'Junior-Oréol', 'Canada', 'oreolnoumodong@gmail.com', 690079333, 'Cuba', 'Togo'),
-('LEN4', 'Noumodong', 'Junior-Oréol', 'Canada', 'oreolnoumodong@gmail.com', 690079333, 'Cuba', 'Togo'),
-('JAJ', 'BETSEM A ABEDIANG JU§', 'Edouard Junior', 'Terminux', 'betsemedouard@gmail.com', 689854711, 'Cuba', 'Chili'),
-('JILY', 'Betsem', 'Edouard', 'Terminux', 'betsemedouard@gmail.com', 689854711, 'Cuba', 'Chili'),
-('JUL', 'Betsem', 'Edouard', 'Terminux', 'betsemedouard@gmail.com', 689854711, 'Cuba', 'Chili'),
-('JUH', 'Betsem', 'Edouard', 'Terminux', 'betsemedouard@gmail.com', 689854711, 'Cuba', 'Chili'),
-('JUNI', 'Ngoufack', 'Ursem', 'Emana', 'ursemngoufack@gmail.com', 695825524, 'Cuba', 'Chili'),
-('JUN', 'Ngoufack', 'Ursem', 'Emana', 'ursemngoufack@gmail.com', 695825524, 'Cuba', 'Chili'),
-('LEN', 'Noumodong', 'Junior-Oréol', 'Canada', 'oreolnoumodong@gmail.com', 651922571, 'Cuba', 'Togo'),
-('JILE', 'BETSEM A ABEDIANG', 'Edouard', 'Terminux', 'betsemedouard@gmail.com', 689854711, 'Cuba', 'Chili'),
-('LEN3', 'Noumodong', 'Junior-Oréol', 'Canada', 'oreolnoumodong@gmail.com', 651922571, 'Cuba', 'Togo'),
-('LEN8', 'Noumodong', 'Junior-Oréol', 'Canada', 'oreolnoumodong@gmail.com', 690079333, 'Cuba', 'Togo'),
-('LEN9', 'Noumodong', 'Junior-Oréol', 'Canada', 'oreolnoumodong@gmail.com', 690079333, 'Cuba', 'Togo'),
-('LE10', 'Noumodong', 'Junior-Oréol', 'Canada', 'oreolnoumodong@gmail.com', 690079333, 'Cuba', 'Togo'),
-('LE11', 'Noumodong', 'Junior-Oréol', 'Canada', 'oreolnoumodong@gmail.com', 690079333, 'Cuba', 'Togo'),
-('riz', 'zambou Zambou', 'Ditriech', 'Yaoundé', 'zam@gmail.com', 655527847, 'Inde', 'Mali'),
-('ri1', 'zambou Zambou', 'Ditriech', 'Yaoundé', 'zam@gmail.com', 655527847, 'Inde', 'Mali'),
-('ri2', 'zambou Zambou', 'Ditriech', 'Yaoundé', 'zam@gmail.com', 655527847, 'Inde', 'Mali'),
-('yon', 'd', 'd', 'l', 'l', 444, 'Irak', 'Togo'),
-('yoo', 'd', 'd', 'l', 'l', 444, 'Irak', 'Togo'),
-('BRIN', 'Bill', 'Gates', 'Califonia', 'cali@gmail.com', 690079333, 'Laos', 'Chili'),
-('BRID', 'Bill', 'Gates', 'Califonia', 'cali@gmail.com', 690079333, 'Laos', 'Chili'),
-('BRIT', 'Bill', 'Gates', 'Califonia', 'cali@gmail.com', 690079333, 'Laos', 'Chili'),
-('XOn', 'Xoximan', 'poo', 'oo', 'ooo', 14, 'Cuba', 'Chili'),
-('XOit', 'Xoximan', 'poo', 'oo', 'ooo', 14, 'Cuba', 'Chili'),
-('XOip', 'Xoximan', 'poo', 'oo', 'ooo@lklkll', 14, 'Cuba', 'Chili'),
-('Love', 'Noumdong', 'Junior', 'Yaoundé', 'oerolnoumodong@gmail.com', 690079333, 'Cuba', 'Inde'),
-('LION', 'Noumdong', 'Junior', 'Yaoundé', 'oerolnoumodong@gmail.com', 690079333, 'Cuba', 'Inde'),
-('LOU', 'Noumdong', 'Junior', 'Yaoundé', 'oerolnoumodong@gmail.com', 690079333, 'Cuba', 'Inde');
+INSERT INTO `enseignant` (`id_enseignant`, `nom_enseignant`, `prenom_enseignant`, `add_enseignant`, `email_enseignant`, `telephone_enseignant`, `statut_enseignant`) VALUES
+('JUU', 'Ngoufack Wolfi', 'Ursem W', 'EmanaII', 'ursemngoufack@gmail.com', 690000000, 'Vacataire'),
+('15', 'Kemkeu', 'Pacome', 'Melin', 'pacome@gmail.com', 690000000, 'Vacataire'),
+('LEN6', 'Noumodong', 'Junior-Oréol', 'Canadas', 'oreolnoumodong@gmail.com', 690000000, 'Vacataire'),
+('LEN5', 'Noumodong', 'Junior-Oréol', 'Canada', 'oreolnoumodong@gmail.com', 690079333, 'Permanent'),
+('JUH', 'Betsem', 'Edouard', 'Terminux', 'betsemedouard@gmail.com', 690000000, 'Vacataire'),
+('11', 'Kameni', 'Alex', 'Ngoa-Ekele', 'kams@gmail.com', 690000000, 'Vacataire'),
+('7', 'Etogo', 'Onana', 'Yaoundé,Essomba', 'etogoonana@gmail.com', 690000000, 'Vacataire');
 
 -- --------------------------------------------------------
 
@@ -160,11 +155,32 @@ INSERT INTO `enseignant` (`id_enseignant`, `nom_enseignant`, `prenom_enseignant`
 -- Table structure for table `groupe`
 --
 
-CREATE TABLE `groupe` (
+DROP TABLE IF EXISTS `groupe`;
+CREATE TABLE IF NOT EXISTS `groupe` (
   `id_groupe` char(5) NOT NULL,
   `nom_groupe` char(20) NOT NULL,
-  `code_classe` char(20) DEFAULT NULL
+  `code_classe` char(20) DEFAULT NULL,
+  PRIMARY KEY (`id_groupe`),
+  KEY `code_classe` (`code_classe`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `identifiant`
+--
+
+DROP TABLE IF EXISTS `identifiant`;
+CREATE TABLE IF NOT EXISTS `identifiant` (
+  `autoIncri` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `identifiant`
+--
+
+INSERT INTO `identifiant` (`autoIncri`) VALUES
+(17);
 
 -- --------------------------------------------------------
 
@@ -172,9 +188,11 @@ CREATE TABLE `groupe` (
 -- Table structure for table `labo_tp`
 --
 
-CREATE TABLE `labo_tp` (
+DROP TABLE IF EXISTS `labo_tp`;
+CREATE TABLE IF NOT EXISTS `labo_tp` (
   `code_laboratoire` char(5) NOT NULL,
-  `libelle_laboratoire` char(30) NOT NULL
+  `libelle_laboratoire` char(30) NOT NULL,
+  PRIMARY KEY (`code_laboratoire`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -183,11 +201,13 @@ CREATE TABLE `labo_tp` (
 -- Table structure for table `plage`
 --
 
-CREATE TABLE `plage` (
+DROP TABLE IF EXISTS `plage`;
+CREATE TABLE IF NOT EXISTS `plage` (
   `code_plage` char(5) NOT NULL,
   `libelle_plage` char(10) NOT NULL,
   `heure_debut` date NOT NULL,
-  `heure_fin` date NOT NULL
+  `heure_fin` date NOT NULL,
+  PRIMARY KEY (`code_plage`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -196,10 +216,13 @@ CREATE TABLE `plage` (
 -- Table structure for table `salle`
 --
 
-CREATE TABLE `salle` (
+DROP TABLE IF EXISTS `salle`;
+CREATE TABLE IF NOT EXISTS `salle` (
   `code_salle` char(5) NOT NULL,
   `nom_salle` char(15) NOT NULL,
-  `code_classe` char(5) DEFAULT NULL
+  `code_classe` char(5) DEFAULT NULL,
+  PRIMARY KEY (`code_salle`),
+  KEY `code_classe` (`code_classe`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -208,98 +231,13 @@ CREATE TABLE `salle` (
 -- Table structure for table `tp`
 --
 
-CREATE TABLE `tp` (
+DROP TABLE IF EXISTS `tp`;
+CREATE TABLE IF NOT EXISTS `tp` (
   `id_tp` char(5) NOT NULL,
-  `nom_tp` char(30) NOT NULL
+  `nom_tp` char(30) NOT NULL,
+  PRIMARY KEY (`id_tp`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `categorie`
---
-ALTER TABLE `categorie`
-  ADD PRIMARY KEY (`code_categorie`);
-
---
--- Indexes for table `classe`
---
-ALTER TABLE `classe`
-  ADD PRIMARY KEY (`code_classe`);
-
---
--- Indexes for table `cours`
---
-ALTER TABLE `cours`
-  ADD PRIMARY KEY (`code_cours`),
-  ADD KEY `code_salle` (`code_salle`);
-
---
--- Indexes for table `dates`
---
-ALTER TABLE `dates`
-  ADD PRIMARY KEY (`periodes`);
-
---
--- Indexes for table `dipenser`
---
-ALTER TABLE `dipenser`
-  ADD PRIMARY KEY (`code_cours`,`periodes`,`code_plage`,`id_enseignant`,`code_salle`),
-  ADD KEY `code_salle` (`code_salle`),
-  ADD KEY `periodes` (`periodes`),
-  ADD KEY `code_plage` (`code_plage`),
-  ADD KEY `id_enseignant` (`id_enseignant`);
-
---
--- Indexes for table `effectuer`
---
-ALTER TABLE `effectuer`
-  ADD PRIMARY KEY (`id_tp`,`code_laboratoire`,`id_enseignant`,`periodes`,`id_groupe`),
-  ADD KEY `code_laboratoire` (`code_laboratoire`),
-  ADD KEY `id_enseignant` (`id_enseignant`),
-  ADD KEY `periodes` (`periodes`),
-  ADD KEY `id_groupe` (`id_groupe`);
-
---
--- Indexes for table `enseignant`
---
-ALTER TABLE `enseignant`
-  ADD PRIMARY KEY (`id_enseignant`),
-  ADD KEY `code_categorie` (`code_categorie`);
-
---
--- Indexes for table `groupe`
---
-ALTER TABLE `groupe`
-  ADD PRIMARY KEY (`id_groupe`),
-  ADD KEY `code_classe` (`code_classe`);
-
---
--- Indexes for table `labo_tp`
---
-ALTER TABLE `labo_tp`
-  ADD PRIMARY KEY (`code_laboratoire`);
-
---
--- Indexes for table `plage`
---
-ALTER TABLE `plage`
-  ADD PRIMARY KEY (`code_plage`);
-
---
--- Indexes for table `salle`
---
-ALTER TABLE `salle`
-  ADD PRIMARY KEY (`code_salle`),
-  ADD KEY `code_classe` (`code_classe`);
-
---
--- Indexes for table `tp`
---
-ALTER TABLE `tp`
-  ADD PRIMARY KEY (`id_tp`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
