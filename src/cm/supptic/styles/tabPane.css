@@ -1,0 +1,126 @@
+
+.roots{
+	-fx-background-image: url('../icons/bac01.png');
+	-fx-background-size: cover;
+}
+#tabPane{
+    -fx-background-color: white;
+    -fx-tab-min-height:20em;
+    -fx-tab-max-height:20em;
+
+    -fx-tab-min-width:0.5em;
+    -fx-tab-max-width:0.5em;
+    -fx-padding:0 -1 -1 0;
+    -fx-background-color:transparent;
+}
+
+.tab-pane .tab-header-area{
+    -fx-background-color:#f7f7f7;
+}
+
+.tab-pane .tab-header-area .headers-region .tab:left {
+    -fx-background-color: transparent;
+}
+
+.tab {
+    -fx-background-color: #ffffff;
+    -fx-background-radius:0.0;
+    -fx-background-insets:0.0;
+    -fx-padding:0 30 0 30;
+}
+
+.tab .tab-label{
+    -fx-background-color: transparent;
+    -fx-alignment:CENTER;
+    -fx-text-fill:#bababa;
+
+}
+
+.tab:selected{
+
+    -fx-background-color:#f2fefa ;
+    -fx-background-radius:0.0;
+    -fx-background-insets:0.0;
+    -fx-border-width: 2 0 0 0 ;
+    -fx-border-color: #00aff0;
+}
+
+.tab *.focus-indicator{
+    -fx-focus-color:transparent ;
+    -fx-border-color:transparent;
+}
+.tab:focused{
+    -fx-focus-color:transparent ;
+    -fx-border-color:transparent;
+}
+
+.tab-pane *.tab-header-background{
+    -fx-background-color:transparent;
+}
+
+.tab-pane:left *.tab-header-area{
+    -fx-padding:0.0em 0.0em 0.0em 0.0em;
+    -fx-background-color:transparent;
+}
+
+/*Couleur de teste */ 
+
+#hear1:selected  {
+	-fx-background-color: #e2eef6;
+}
+#hear2:selected  {
+    -fx-background-color: #e2eef6;
+}
+#hear3:selected  {
+    -fx-background-color: #e2eef6;
+}
+#hear4:selected  {
+    -fx-background-color: #e2eef6;
+}
+#hear5:selected  {
+    -fx-background-color: #e2eef6;
+}
+#hear6:selected  {
+    -fx-background-color: #e2eef6;
+}
+
+
+
+/*Couleur des icones*/
+/*#p_confiances:selected #h1 > #img1{
+	-fx-image:url("../icons/TeacherHiring.png");
+}
+#p_personnels:selected #h2 > #img2{
+	-fx-image:url("../icons/Schedule.png");
+}
+#p_messages:selected #h3 > #img3{
+	-fx-image:url("../icons/Engineering.png");
+}
+#p_discusions:selected #h4 > #img4{
+	-fx-image:url("../icons/Money.png");
+}
+*/
+/*image place
+
+
+*/
+ #img1{
+	-fx-image:url("../icons/TeacherHiring.png");
+}
+ #img2{
+	-fx-image:url("../icons/Schedule.png");
+}
+ #img3{
+	-fx-image:url("../icons/mail.png");
+}
+ 
+#t1,#t2,#t3,#t4{
+	-fx-fill: #6f7279;
+}
+
+
+/**deconnexion
+*/
+.decon:hover{
+    -fx-background-color: #f1f1f1
+}

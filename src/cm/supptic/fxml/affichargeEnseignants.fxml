@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="514.0" prefWidth="985.0" style="-fx-background-color: white;" stylesheets="@../styles/tableview.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.supptic.controllers.VoirListeEnseignantController">
+   <children>
+      <VBox alignment="CENTER" layoutX="2.0" prefHeight="553.0" prefWidth="941.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <StackPane fx:id="panStackFocus" alignment="TOP_CENTER" prefHeight="504.0" prefWidth="985.0">
+               <children>
+                  <AnchorPane fx:id="panFocus" prefHeight="505.0" prefWidth="975.0" StackPane.alignment="CENTER">
+                     <children>
+                        <TableView fx:id="tableEnseignant" layoutY="67.0" prefHeight="372.0" prefWidth="975.0" style="-fx-border-color: #e8e8e8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="67.0">
+                          <columns>
+                            <TableColumn fx:id="idColumn" prefWidth="75.0" text="id" />
+                            <TableColumn fx:id="nomColumn" prefWidth="75.0" text="Noms" />
+                              <TableColumn fx:id="prenomsColumn" prefWidth="75.0" text="Prenoms" />
+                              <TableColumn fx:id="adresseColumn" prefWidth="75.0" text="Adresses " />
+                              <TableColumn fx:id="emailColumn" prefWidth="75.0" text="Emails" />
+                              <TableColumn fx:id="telephoneColumn" prefWidth="75.0" text="Télephones" />
+                              <TableColumn fx:id="statutColumn" prefWidth="75.0" text="Statuts" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                           
+                                                                                                                                                      </TableView>
+                        <HBox layoutX="540.0" layoutY="460.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="43.0">
+                           <children>
+                              <JFXButton onMouseClicked="#imprimerCliquer" style="-fx-background-radius: 10px; -fx-border-color: #00aff0; -fx-border-radius: 10px; -fx-background-color: transparent;" text="Imprimer" textFill="#00aff0">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/Print_32px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton onMouseClicked="#supprimerCliquer" style="-fx-background-radius: 10px; -fx-border-color: #d05b5b; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Supprimer" textFill="#c22222">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/Trash%20Can_50px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton onMouseClicked="#modifierCliquer" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #5ada96;" text="Modifier" textFill="#1aa45b">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/Pencil_50px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton onMouseClicked="#infosEnseignantCliquer" prefHeight="28.0" prefWidth="86.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #00aff0;" text="Infos" textFill="#00aff0">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/Eye_48px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <AnchorPane layoutX="70.0" layoutY="30.0" style="-fx-background-color: white; -fx-border-color: #00aff0; -fx-border-radius: 50px;" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="10.0">
+                           <children>
+                              <JFXTextField fx:id="nomRecherche" focusColor="WHITE" layoutX="14.0" layoutY="2.0" onKeyPressed="#recherchePressed" prefHeight="25.0" prefWidth="179.0" unFocusColor="WHITE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="2.0" />
+                              <HBox alignment="CENTER" layoutX="213.0" layoutY="1.0" onMouseClicked="#rechercheCliquer" style="-fx-background-radius: 0px 50px 50px 0px; -fx-background-color: #f1f1f1;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/Search_52px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                        <Text fx:id="demandeUneSelection" fill="#00aff0" layoutX="408.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veillez sélectionner un enregistrement" visible="false">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Text>
+                        <VBox alignment="CENTER" layoutX="14.0" layoutY="30.0" onMouseClicked="#actualiserCliquer" style="-fx-background-radius: 100px; -fx-border-radius: 100px; -fx-border-color: #ceebf6;" styleClass="actualiser" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="10.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/Refresh_64px.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </StackPane>
+         </children>
+      </VBox>
+      <Pane fx:id="panSnackbar" layoutX="100.0" layoutY="519.0" prefHeight="6.0" prefWidth="200.0" style="-fx-background-color: transparent;" stylesheets="@../styles/tableview.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="100.0" />
+   </children>
+</AnchorPane>

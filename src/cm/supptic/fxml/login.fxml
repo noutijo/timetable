@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="anchorLaunchLogin" prefHeight="304.0" prefWidth="504.0" style="-fx-background-color: transparent;" stylesheets="@../styles/fonts.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.supptic.controllers.LoginController">
+   <children>
+      <AnchorPane layoutX="88.0" layoutY="51.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" styleClass="root" stylesheets="@../styles/launch.css" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="6.0">
+         <effect>
+            <DropShadow color="#7c7979" />
+         </effect>
+         <children>
+            <HBox layoutX="430.0" layoutY="7.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <VBox alignment="CENTER" onMouseClicked="#reduireCliquer">
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/Minus_48px.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" onMouseClicked="#closeCliquer">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/Delete_50px.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox layoutX="137.0" layoutY="99.0" spacing="30.0" AnchorPane.bottomAnchor="113.0" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="117.0" AnchorPane.topAnchor="99.0">
+               <children>
+                  <HBox>
+                     <children>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/User_48px.png" />
+                           </image>
+                        </ImageView>
+                        <JFXTextField fx:id="user" prefHeight="25.0" prefWidth="203.0">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </JFXTextField>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/Key%202_50px.png" />
+                           </image>
+                        </ImageView>
+                        <JFXPasswordField fx:id="passwd" prefHeight="25.0" prefWidth="203.0">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </JFXPasswordField>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <JFXButton layoutX="256.0" layoutY="221.0" onMouseClicked="#loginCliquer" prefHeight="28.0" prefWidth="114.0" style="-fx-border-color: #00aff0; -fx-border-radius: 10px;" text="Se connecter" textFill="#00aff0" AnchorPane.bottomAnchor="43.0" AnchorPane.rightAnchor="122.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></JFXButton>
+            <Separator layoutX="124.0" layoutY="297.0" opacity="0.5" prefWidth="200.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="0.0" />
+            <ImageView fitHeight="170.0" fitWidth="220.0" layoutX="14.0" layoutY="-28.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/timetable.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="errorText" fill="#d31818" layoutX="148.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Identifiant ou mot de passe incorrect" visible="false">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
