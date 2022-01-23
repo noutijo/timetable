@@ -1,7 +1,7 @@
 # timtable
 `timtable` is a desktop application for automatic generate timetables.
 
->Watch the demonstration on youTube: [timtable](https://youtu.be/gs1yInbSJEA)
+>Watch the demonstration on youTube: [timtable](https://youtu.be/HZGmThOR4FM)
 
 # libs
 
@@ -21,7 +21,7 @@ Then you will modify `YOUR PASSWORD` in the file `AvoirConnection.java` at the r
 
         Connection myConne = null;
         Class.forName("com.mysql.jdbc.Driver");
-        myConne = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/supptic", "root", "bihoncare");
+        myConne = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/supptic", "root", "YOUR PASSWORD");
         System.out.println("Connecté !");
 
         return myConne;
@@ -30,7 +30,10 @@ Then you will modify `YOUR PASSWORD` in the file `AvoirConnection.java` at the r
  ```
 
 # login
-Once you have launched the application you must log in as either administrator or voter.
+Once you have launched the application you must log to manage.
+
+Default id: `oreol`
+Default password: `oreol`
 
 ![](/imgs/login.png)
 
@@ -38,20 +41,13 @@ Once you have launched the application you must log in as either administrator o
 
 Some administrator side features
 
-`Add candidate`
+`Teachers list `
 
-![](/imgs/addcandidat.png)
+![](/imgs/teacherslist.png)
 
-`View the voting results`
+`View teacher infos`
 
-![](/imgs/result.png)
+![](/imgs/consultteacherinfos.png)
 
-# elector
-
-Some elector side features
-
-`Vote for a candidate`
-
-![](/imgs/elector.png)
 
 

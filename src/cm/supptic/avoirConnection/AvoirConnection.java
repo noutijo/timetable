@@ -19,7 +19,7 @@ public class AvoirConnection {
 
         Connection myConne = null;
         Class.forName("com.mysql.jdbc.Driver");
-        myConne = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/supptic", "root", "bihoncare");
+        myConne = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/supptic", "root", "YOUR PASSWORD");
         System.out.println("Connecté !");
 
         return myConne;
