@@ -1,5 +1,5 @@
-# timtable
-`timtable` is a desktop application for automatic generate timetables.
+# timeTable
+`timeTable` is a desktop application for automatic generate timetables.
 
 >Watch the demonstration on youTube: [timtable](https://youtu.be/HZGmThOR4FM)
 
